@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Portfolio | Your Name</title>
+    <title>Tech Portfolio | Mustapha</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -159,7 +159,7 @@
             box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
         }
         
-        .profile-placeholder {
+        .profile-placeholder, .profile-placeholder img {
             width: 280px;
             height: 280px;
             border-radius: 50%;
@@ -228,6 +228,60 @@
             font-size: 1.2rem;
         }
         
+        /* Technical Skills Styles */
+        .skills-container {
+            background-color: var(--accent);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid #444;
+        }
+        
+        .skills-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skills-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.8rem;
+            border-radius: 8px;
+            transition: var(--transition);
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .skill-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.3);
+            transform: translateX(5px);
+        }
+        
+        .skill-icon {
+            color: var(--primary);
+            font-size: 1.1rem;
+            width: 24px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .skill-name {
+            color: var(--text);
+            font-weight: 500;
+        }
+        
         /* Projects Section */
         .projects-grid {
             display: grid;
@@ -263,10 +317,33 @@
             padding: 1.5rem;
         }
         
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
         .project-title {
             font-size: 1.3rem;
-            margin-bottom: 0.5rem;
             color: var(--primary);
+        }
+        
+        .github-link {
+            color: var(--text);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            padding: 5px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .github-link:hover {
+            color: var(--primary);
+            background-color: rgba(255, 215, 0, 0.1);
+            transform: scale(1.1);
         }
         
         .project-description {
@@ -354,6 +431,178 @@
             color: var(--text-secondary);
         }
         
+        /* Event Gallery Styles - IMPROVED */
+        .event-gallery {
+            margin-top: 2rem;
+        }
+        
+        .gallery-title {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            background: var(--secondary);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+        
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--accent), var(--light));
+            color: var(--primary);
+            font-size: 3rem;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .gallery-placeholder span {
+            font-size: 1rem;
+            margin-top: 1rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox-content {
+            max-width: 95%;
+            max-height: 95%;
+            position: relative;
+        }
+        
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 95vh;
+            border-radius: 8px;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            background: rgba(0, 0, 0, 0.7);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox-close:hover {
+            color: var(--primary);
+            background: rgba(255, 215, 0, 0.2);
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 30px;
+        }
+        
+        .lightbox-prev, .lightbox-next {
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            background: rgba(0, 0, 0, 0.7);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid transparent;
+        }
+        
+        .lightbox-prev:hover, .lightbox-next:hover {
+            color: var(--primary);
+            background: rgba(255, 215, 0, 0.2);
+            border-color: var(--primary);
+        }
+        
+        .lightbox-counter {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            color: white;
+            font-size: 1.1rem;
+        }
+        
         /* Expertise Section */
         .expertise-grid {
             display: grid;
@@ -425,6 +674,35 @@
         .interest-name {
             font-size: 1rem;
             text-align: center;
+        }
+        
+        .interests-section {
+            padding: 5rem 0;
+        }
+        
+        .interests-category {
+            margin-bottom: 4rem;
+        }
+        
+        .category-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
         }
         
         /* Contact Section */
@@ -622,6 +900,14 @@
             .hero-text h1 {
                 font-size: 2.5rem;
             }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .skills-list {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 768px) {
@@ -640,6 +926,20 @@
             .about-details {
                 grid-template-columns: 1fr;
             }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .lightbox-nav {
+                padding: 0 15px;
+            }
+            
+            .lightbox-prev, .lightbox-next {
+                width: 50px;
+                height: 50px;
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -650,7 +950,7 @@
             <div class="header-content">
                 <div class="logo">
                     <i class="fas fa-code logo-icon"></i>
-                    <span>DevPortfolio</span>
+                    <span>OM - My Portfolio</span>
                 </div>
                 <nav class="nav-links">
                     <a href="#about">About</a>
@@ -669,9 +969,9 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Hi, I'm <span>Alex Morgan</span></h1>
-                    <p>Full Stack Developer & Cybersecurity Specialist</p>
-                    <p>Building secure, scalable solutions for the digital world</p>
+                    <h1>Hello, I'm <span>Mustapha</span></h1>
+                    <p>Full Stack Developer & Data Analysis Student</p>
+                    <p>Building secure, scalable & robust solutions for the digital world</p>
                     <a href="#contact" class="btn">Get In Touch</a>
                 </div>
                 <div class="hero-image">
@@ -696,62 +996,77 @@
                     <div class="about-details">
                         <div class="detail-item">
                             <i class="fas fa-map-marker-alt detail-icon"></i>
-                            <span>San Francisco, CA</span>
+                            <span>Algiers Centre, ALGERIA</span>
                         </div>
                         <div class="detail-item">
                             <i class="fas fa-graduation-cap detail-icon"></i>
-                            <span>MSc in Computer Science</span>
+                            <span>Currently studying in ENSIA</span>
                         </div>
                         <div class="detail-item">
                             <i class="fas fa-briefcase detail-icon"></i>
-                            <span>5+ Years Experience</span>
+                            <span>For hire</span>
                         </div>
                         <div class="detail-item">
                             <i class="fas fa-certificate detail-icon"></i>
-                            <span>Security+ Certified</span>
+                            <span>Looking for internships</span>
                         </div>
                     </div>
                 </div>
-                <div class="about-skills">
-                    <h3 style="margin-bottom: 1.5rem;">Technical Skills</h3>
-                    <div class="skills-list">
-                        <div style="margin-bottom: 1rem;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                <span>JavaScript/TypeScript</span>
-                                <span>90%</span>
+                <div class="skills-container">
+                    <h3 class="skills-title">
+                        <i class="fas fa-cogs"></i>
+                        Technical Skills
+                    </h3>
+                    <ul class="skills-list">
+                        <li class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fab fa-js-square"></i>
                             </div>
-                            <div style="height: 8px; background-color: var(--accent); border-radius: 4px;">
-                                <div style="height: 100%; width: 90%; background-color: var(--primary); border-radius: 4px;"></div>
+                            <span class="skill-name">JavaScript/TypeScript</span>
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fab fa-node-js"></i>
                             </div>
-                        </div>
-                        <div style="margin-bottom: 1rem;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                <span>Node.js & Express</span>
-                                <span>85%</span>
+                            <span class="skill-name">Node.js & Express</span>
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fab fa-react"></i>
                             </div>
-                            <div style="height: 8px; background-color: var(--accent); border-radius: 4px;">
-                                <div style="height: 100%; width: 85%; background-color: var(--primary); border-radius: 4px;"></div>
+                            <span class="skill-name">React Native</span>
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fas fa-sitemap"></i>
                             </div>
-                        </div>
-                        <div style="margin-bottom: 1rem;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                <span>React & Vue.js</span>
-                                <span>80%</span>
+                            <span class="skill-name">System Design</span>
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fas fa-database"></i>
                             </div>
-                            <div style="height: 8px; background-color: var(--accent); border-radius: 4px;">
-                                <div style="height: 100%; width: 80%; background-color: var(--primary); border-radius: 4px;"></div>
+                            <span class="skill-name">Database Management</span>
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fas fa-shield-alt"></i>
                             </div>
-                        </div>
-                        <div style="margin-bottom: 1rem;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                <span>Cybersecurity</span>
-                                <span>75%</span>
+                            <span class="skill-name">Cybersecurity</span>
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fab fa-python"></i>
                             </div>
-                            <div style="height: 8px; background-color: var(--accent); border-radius: 4px;">
-                                <div style="height: 100%; width: 75%; background-color: var(--primary); border-radius: 4px;"></div>
+                            <span class="skill-name">Python</span>
+                        </li>
+                        <li class="skill-item">
+                            <div class="skill-icon">
+                                <i class="fas fa-cloud"></i>
                             </div>
-                        </div>
-                    </div>
+                            <span class="skill-name">Cloud Computing</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -767,7 +1082,12 @@
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <div class="project-info">
-                        <h3 class="project-title">SecureAuth System</h3>
+                        <div class="project-header">
+                            <h3 class="project-title">TRAKIT</h3>
+                            <a href="https://github.com/mustapha-otsmane/trakit" class="github-link" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
                         <p class="project-description">A multi-factor authentication system with biometric verification and behavioral analysis.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Node.js</span>
@@ -782,7 +1102,12 @@
                         <i class="fas fa-chart-network"></i>
                     </div>
                     <div class="project-info">
-                        <h3 class="project-title">Network Monitor</h3>
+                        <div class="project-header">
+                            <h3 class="project-title">MoneyCash</h3>
+                            <a href="https://github.com/mustapha-otsmane/moneycash" class="github-link" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
                         <p class="project-description">Real-time network traffic analysis tool with threat detection and alert system.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Python</span>
@@ -797,8 +1122,33 @@
                         <i class="fas fa-lock"></i>
                     </div>
                     <div class="project-info">
-                        <h3 class="project-title">Encrypted Messenger</h3>
+                        <div class="project-header">
+                            <h3 class="project-title">Storium</h3>
+                            <a href="https://github.com/mustapha-otsmane/storium" class="github-link" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
                         <p class="project-description">End-to-end encrypted messaging application with self-destructing messages.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Socket.io</span>
+                            <span class="tech-tag">AES-256</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-train"></i>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-header">
+                            <h3 class="project-title">Train_Wreckless</h3>
+                            <a href="https://github.com/mustapha-otsmane/train-wreckless" class="github-link" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                        <p class="project-description">Railway management system with real-time tracking and predictive maintenance.</p>
                         <div class="project-tech">
                             <span class="tech-tag">React Native</span>
                             <span class="tech-tag">Node.js</span>
@@ -814,51 +1164,124 @@
     <!-- Events Section -->
     <section id="events" class="section section-dark">
         <div class="container">
-            <h2 class="section-title">Events & Conferences</h2>
+            <h2 class="section-title">Events & Conferences I Attended</h2>
             <div class="events-timeline">
+                <!-- QNexus Event -->
                 <div class="event-item">
                     <div class="event-date">
-                        <span class="month">OCT</span>
-                        <span class="year">2023</span>
+                        <span class="month">FEB 15</span>
+                        <span class="year">2025</span>
                     </div>
                     <div class="event-content">
-                        <h3 class="event-title">Black Hat Europe 2023</h3>
-                        <p class="event-description">Presented research on emerging threats in IoT security and participated in hands-on workshops.</p>
+                        <h3 class="event-title">QNexus 25</h3>
+                        <p class="event-description">Attended Pr. Taha Rouabah's interview and participated in hands-on workshops about QVA and QML.</p>
+                        
+                        <!-- Event Gallery -->
+                        <div class="event-gallery">
+                            <h4 class="gallery-title">
+                                <i class="fas fa-images"></i>
+                                Event Photos
+                            </h4>
+                            <div class="gallery-grid">
+                                <div class="gallery-item" data-event="qnexus" data-index="0">
+                                    <div class="gallery-image">
+                                        <div class="gallery-placeholder">
+                                            <i class="fas fa-brain"></i>
+                                            <span>QML Workshop Session</span>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-caption">
+                                        Quantum Machine Learning Workshop
+                                    </div>
+                                </div>
+                                <div class="gallery-item" data-event="qnexus" data-index="1">
+                                    <div class="gallery-image">
+                                        <div class="gallery-placeholder">
+                                            <i class="fas fa-calculator"></i>
+                                            <span>QVA Algorithm Session</span>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-caption">
+                                        Quantum Variational Algorithms
+                                    </div>
+                                </div>
+                                <div class="gallery-item" data-event="qnexus" data-index="2">
+                                    <div class="gallery-image">
+                                        <div class="gallery-placeholder">
+                                            <i class="fas fa-user-tie"></i>
+                                            <span>Professor Interview</span>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-caption">
+                                        Interview with Pr. Taha Rouabah
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                
+                <!-- AWS Discovery Event -->
                 <div class="event-item">
                     <div class="event-date">
-                        <span class="month">JUL</span>
-                        <span class="year">2023</span>
+                        <span class="month">FEB 21</span>
+                        <span class="year">2025</span>
                     </div>
                     <div class="event-content">
-                        <h3 class="event-title">DEF CON 31</h3>
-                        <p class="event-description">Attended various security villages and participated in capture the flag competitions.</p>
-                    </div>
-                </div>
-                <div class="event-item">
-                    <div class="event-date">
-                        <span class="month">MAY</span>
-                        <span class="year">2023</span>
-                    </div>
-                    <div class="event-content">
-                        <h3 class="event-title">RSA Conference 2023</h3>
-                        <p class="event-description">Networked with industry leaders and attended sessions on zero-trust architecture.</p>
-                    </div>
-                </div>
-                <div class="event-item">
-                    <div class="event-date">
-                        <span class="month">MAR</span>
-                        <span class="year">2023</span>
-                    </div>
-                    <div class="event-content">
-                        <h3 class="event-title">OWASP Global AppSec</h3>
-                        <p class="event-description">Led a workshop on secure coding practices for web applications.</p>
+                        <h3 class="event-title">AWS Discovery</h3>
+                        <p class="event-description">Attended an amazing lecture by Bilal Kalem, a certified AWS instructor on the essentials of AWS cloud technology.</p>
+                        
+                        <!-- Event Gallery -->
+                        <div class="event-gallery">
+                            <h4 class="gallery-title">
+                                <i class="fas fa-images"></i>
+                                Event Photos
+                            </h4>
+                            <div class="gallery-grid">
+                                <div class="gallery-item" data-event="aws" data-index="0">
+                                    <div class="gallery-image">
+                                        <div class="gallery-placeholder">
+                                            <i class="fas fa-cloud"></i>
+                                            <span>Cloud Architecture Deep Dive</span>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-caption">
+                                        AWS Cloud Infrastructure
+                                    </div>
+                                </div>
+                                <div class="gallery-item" data-event="aws" data-index="1">
+                                    <div class="gallery-image">
+                                        <div class="gallery-placeholder">
+                                            <i class="fas fa-chalkboard-teacher"></i>
+                                            <span>Bilal Kalem's Session</span>
+                                        </div>
+                                    </div>
+                                    <div class="gallery-caption">
+                                        Lecture by Certified AWS Instructor
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="lightbox-modal">
+        <div class="lightbox-content">
+            <span class="lightbox-close">&times;</span>
+            <div class="lightbox-nav">
+                <div class="lightbox-prev">&#10094;</div>
+                <div class="lightbox-next">&#10095;</div>
+            </div>
+            <img class="lightbox-image" src="" alt="Event Photo">
+            <div class="lightbox-counter">
+                <span id="currentIndex">1</span> / <span id="totalImages">3</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Expertise Section -->
     <section id="expertise" class="section">
@@ -867,10 +1290,10 @@
             <div class="expertise-grid">
                 <div class="expertise-card">
                     <div class="expertise-icon">
-                        <i class="fas fa-lock"></i>
+                        <i class="fa-solid fa-terminal"></i>
                     </div>
-                    <h3 class="expertise-title">Application Security</h3>
-                    <p class="expertise-description">Implementing security measures throughout the software development lifecycle.</p>
+                    <h3 class="expertise-title">Competitive Programming</h3>
+                    <p class="expertise-description">Implementing solutions and programs that stand out and are reliable.</p>
                 </div>
                 <div class="expertise-card">
                     <div class="expertise-icon">
@@ -881,62 +1304,133 @@
                 </div>
                 <div class="expertise-card">
                     <div class="expertise-icon">
-                        <i class="fas fa-cloud"></i>
+                        <i class="fa-solid fa-project-diagram"></i>
                     </div>
-                    <h3 class="expertise-title">Cloud Security</h3>
-                    <p class="expertise-description">Designing secure cloud architectures and implementing best practices.</p>
-                </div>
-                <div class="expertise-card">
-                    <div class="expertise-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 class="expertise-title">Threat Modeling</h3>
-                    <p class="expertise-description">Identifying potential security threats and implementing countermeasures.</p>
+                    <h3 class="expertise-title">Mathematical Modelling</h3>
+                    <p class="expertise-description">Translating real world problems into quantities to be manipulated.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Interests Section -->
-    <section id="interests" class="section section-dark">
+    <section id="interests" class="interests-section section-dark">
         <div class="container">
-            <h2 class="section-title">Personal Interests</h2>
-            <div class="interests-container">
-                <div class="interest-item">
-                    <div class="interest-icon">
-                        <i class="fas fa-robot"></i>
+            <h2 class="section-title">My Interests</h2>
+            
+            <!-- Technical Interests -->
+            <div class="interests-category">
+                <h3 class="category-title">Technical Interests</h3>
+                <div class="interests-container">
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <span class="interest-name">Computer Networks & Security</span>
                     </div>
-                    <span class="interest-name">AI & Machine Learning</span>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                        <span class="interest-name">System Design</span>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <span class="interest-name">AI & Machine Learning</span>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <span class="interest-name">Data Analysis</span>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <span class="interest-name">Theoretical Physics</span>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <span class="interest-name">Quantum Computing</span>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <span class="interest-name">Economics & Risk Calculation</span>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-chess"></i>
+                        </div>
+                        <span class="interest-name">Game Theory</span>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-square-root-variable"></i>
+                        </div>
+                        <span class="interest-name">Mathematics</span>
+                    </div>
                 </div>
-                <div class="interest-item">
-                    <div class="interest-icon">
-                        <i class="fas fa-gamepad"></i>
+            </div>
+            
+            <!-- Personal Interests -->
+            <div class="interests-category">
+                <h3 class="category-title">Personal Interests</h3>
+                <div class="interests-container">
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-landmark"></i>
+                        </div>
+                        <span class="interest-name">History</span>
                     </div>
-                    <span class="interest-name">Game Development</span>
-                </div>
-                <div class="interest-item">
-                    <div class="interest-icon">
-                        <i class="fas fa-bitcoin"></i>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-pen-fancy"></i>
+                        </div>
+                        <span class="interest-name">Calligraphy</span>
                     </div>
-                    <span class="interest-name">Blockchain Technology</span>
-                </div>
-                <div class="interest-item">
-                    <div class="interest-icon">
-                        <i class="fas fa-hiking"></i>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <span class="interest-name">Politics</span>
                     </div>
-                    <span class="interest-name">Hiking & Outdoor Activities</span>
-                </div>
-                <div class="interest-item">
-                    <div class="interest-icon">
-                        <i class="fas fa-book"></i>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-pray"></i>
+                        </div>
+                        <span class="interest-name">Theology</span>
                     </div>
-                    <span class="interest-name">Reading Tech Blogs</span>
-                </div>
-                <div class="interest-item">
-                    <div class="interest-icon">
-                        <i class="fas fa-music"></i>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <span class="interest-name">Cooking</span>
                     </div>
-                    <span class="interest-name">Electronic Music</span>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-swimmer"></i>
+                        </div>
+                        <span class="interest-name">Swimming</span>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <span class="interest-name">Hill Climbing</span>
+                    </div>
+                    <div class="interest-item">
+                        <div class="interest-icon">
+                            <i class="fas fa-chess-knight"></i>
+                        </div>
+                        <span class="interest-name">Strategy Games</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -954,7 +1448,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Email</h3>
-                            <p>alex.morgan@example.com</p>
+                            <p>mustapha.otsmane@gmail.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -963,7 +1457,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Phone</h3>
-                            <p>+1 (555) 123-4567</p>
+                            <p>/</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -972,7 +1466,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Location</h3>
-                            <p>San Francisco, California</p>
+                            <p>Algiers Centre, ALGERIA</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -1016,10 +1510,10 @@
             <div class="footer-content">
                 <div class="logo">
                     <i class="fas fa-code logo-icon"></i>
-                    <span>DevPortfolio</span>
+                    <span>OM - MyPortfolio</span>
                 </div>
                 <div class="social-links">
-                    <a href="#" class="social-link">
+                    <a href="https://github.com/mustapha-otsmane" class="social-link" target="_blank">
                         <i class="fab fa-github"></i>
                     </a>
                     <a href="#" class="social-link">
@@ -1032,7 +1526,7 @@
                         <i class="fab fa-dev"></i>
                     </a>
                 </div>
-                <p class="copyright">&copy; 2023 Alex Morgan. All rights reserved.</p>
+                <p class="copyright">&copy; 2025 Mustapha. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -1079,11 +1573,107 @@
         }, observerOptions);
         
         // Apply initial styles and observe elements
-        document.querySelectorAll('.project-card, .expertise-card, .interest-item, .event-item').forEach(element => {
+        document.querySelectorAll('.project-card, .expertise-card, .interest-item, .event-item, .skill-item').forEach(element => {
             element.style.opacity = '0';
             element.style.transform = 'translateY(20px)';
             element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             observer.observe(element);
+        });
+
+        // Lightbox functionality
+        const lightboxModal = document.getElementById('lightboxModal');
+        const lightboxImage = document.querySelector('.lightbox-image');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const lightboxPrev = document.querySelector('.lightbox-prev');
+        const lightboxNext = document.querySelector('.lightbox-next');
+        const currentIndexSpan = document.getElementById('currentIndex');
+        const totalImagesSpan = document.getElementById('totalImages');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        let currentEvent = '';
+        let currentIndex = 0;
+        
+        // Event image data
+        const eventImages = {
+            qnexus: [
+                { src: 'assets/qml.jpg', alt: 'QML Workshop at QNexus 25' },
+                { src: 'assets/qva.jpg', alt: 'QVA Workshop at QNexus 25' },
+                { src: 'assets/prf.jpg', alt: 'Interview with Professor at QNexus 25' }
+            ],
+            aws: [
+                { src: 'assets/aws1.jpg', alt: 'Cloud Architecture session at AWS Discovery' },
+                { src: 'assets/aws3.jpg', alt: 'Speaker session with Bilal Kalem' },
+            ]
+        };
+        
+        // Open lightbox when gallery item is clicked
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                currentEvent = item.getAttribute('data-event');
+                currentIndex = parseInt(item.getAttribute('data-index'));
+                openLightbox(currentEvent, currentIndex);
+            });
+        });
+        
+        // Open lightbox function
+        function openLightbox(event, index) {
+            const images = eventImages[event];
+            if (images && images[index]) {
+                lightboxImage.src = images[index].src;
+                lightboxImage.alt = images[index].alt;
+                currentIndexSpan.textContent = index + 1;
+                totalImagesSpan.textContent = images.length;
+                lightboxModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        // Close lightbox
+        lightboxClose.addEventListener('click', () => {
+            lightboxModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close lightbox when clicking outside the image
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal) {
+                lightboxModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Navigate to previous image
+        lightboxPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const images = eventImages[currentEvent];
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            lightboxImage.src = images[currentIndex].src;
+            lightboxImage.alt = images[currentIndex].alt;
+            currentIndexSpan.textContent = currentIndex + 1;
+        });
+        
+        // Navigate to next image
+        lightboxNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const images = eventImages[currentEvent];
+            currentIndex = (currentIndex + 1) % images.length;
+            lightboxImage.src = images[currentIndex].src;
+            lightboxImage.alt = images[currentIndex].alt;
+            currentIndexSpan.textContent = currentIndex + 1;
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (lightboxModal.style.display === 'flex') {
+                if (e.key === 'Escape') {
+                    lightboxModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                } else if (e.key === 'ArrowLeft') {
+                    lightboxPrev.click();
+                } else if (e.key === 'ArrowRight') {
+                    lightboxNext.click();
+                }
+            }
         });
     </script>
 </body>
