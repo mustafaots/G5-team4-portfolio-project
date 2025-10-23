@@ -62,13 +62,13 @@ let currentIndex = 0;
 // Event image data
 const eventImages = {
     qnexus: [
-        { src: 'assets/qml.jpg', alt: 'QML Workshop at QNexus 25' },
-        { src: 'assets/qva.jpg', alt: 'QVA Workshop at QNexus 25' },
-        { src: 'assets/prf.jpg', alt: 'Interview with Professor at QNexus 25' }
+        { src: '../assets-mustapha-otsmane/qml.jpg', alt: 'QML Workshop at QNexus 25' },
+        { src: '../assets-mustapha-otsmane/qva.jpg', alt: 'QVA Workshop at QNexus 25' },
+        { src: '../assets-mustapha-otsmane/prf.jpg', alt: 'Interview with Professor at QNexus 25' }
     ],
     aws: [
-        { src: 'assets/aws1.jpg', alt: 'Cloud Architecture session at AWS Discovery' },
-        { src: 'assets/aws3.jpg', alt: 'Speaker session with Bilal Kalem' },
+        { src: '../assets-mustapha-otsmane/aws1.jpg', alt: 'Cloud Architecture session at AWS Discovery' },
+        { src: '../assets-mustapha-otsmane/aws3.jpg', alt: 'Speaker session with Bilal Kalem' },
     ]
 };
 
