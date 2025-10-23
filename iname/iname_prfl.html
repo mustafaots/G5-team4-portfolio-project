@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mezrouh Iname - AI & Data Science Portfolio</title>
+    <link rel="stylesheet" href="iname_styles.css"></link>
+</head>
+<body>
+  <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="#hero" class="nav-link active" data-section="home">Home</a></li>
+                <li><a href="#skills" class="nav-link" data-section="skills">Skills</a></li>
+                <li><a href="#portfolio" class="nav-link" data-section="portfolio">Portfolio</a></li>
+                <li><a href="#experience" class="nav-link" data-section="experience">Experience</a></li>
+                <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+            </ul>
+            <div class="nav-indicator"></div>
+        </div>
+    </nav>
+     <script>
+        const navLinks = document.querySelectorAll('.nav-link');
+        const navIndicator = document.querySelector('.nav-indicator');
+
+        function updateIndicator(activeLink) {
+            const linkRect = activeLink.getBoundingClientRect();
+            const containerRect = document.querySelector('.nav-container').getBoundingClientRect();
+
+            navIndicator.style.width = linkRect.width + 'px';
+            navIndicator.style.left = (linkRect.left - containerRect.left) + 'px';
+
+            navLinks.forEach(link => link.classList.remove('active'));
+            activeLink.classList.add('active');
+        }
+
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.id;
+                    const activeLink = document.querySelector(`[data-section="${sectionId}"]`);
+                    if (activeLink) {
+                        updateIndicator(activeLink);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const sectionId = link.getAttribute('data-section');
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                    updateIndicator(link);
+                }
+            });
+        });
+
+        window.addEventListener('load', () => {
+            updateIndicator(navLinks[0]);
+        });
+
+        window.addEventListener('resize', () => {
+            const activeLink = document.querySelector('.nav-link.active');
+            if (activeLink) {
+                updateIndicator(activeLink);
+            }
+        });
+    </script>
+
+    <!-- Hero Section -->
+     <div class="hero-container" id="hero">
+        <div class="hero-content">
+            <h1 class="hero-name">Mezrouh<br>Iname</h1>
+            <p class="hero-subtitle">AI & Data Science Student</p>
+            <div class="hero-description">
+               Motivated Computer Science student specializing in Artificial Intelligence and Data Science, with a strong commitment to analytical thinking and practical problem-solving. I am actively developing my expertise in modern tools, frameworks, and emerging technologies, with the ambition to contribute to innovative, real-world projects that create meaningful impact.
+            </div>
+        </div>
+        <div class="hero-avatar-wrapper">
+            <img src="https://sick-moccasin-w5enddyjxw.edgeone.app/iname.png" alt="Profile Avatar" class="hero-avatar">
+        </div>
+    </div>
+
+    <!-- Professional Section -->
+    <section class="section" id="skills">
+        <div class="container">
+            <div class="experience-header">
+            <h2 class="experience-title">01 SKILLS</h2>
+            
+            </div>
+
+            <div class="skills-grid">
+                <div>
+                    <div class="skill-category">
+                        <div class="skill-category-title">MY KNOWLEDGE LEVEL IN PROGRAMMING LANGUAGES</div>
+                        <div class="skill-item">
+                            <span class="skill-name">PYTHON</span>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div>
+                            <span class="skill-percentage">95%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">C++</span>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">MY KNOWLEDGE LEVEL IN FRAMEWORKS & LIBRARIES</div>
+                        <div class="skill-item">
+                            <span class="skill-name">PANDAS & NUMPY</span>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">SCIKIT-LEARN</span>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">MATPLOTLIB</span>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">EXPRESS</span>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 50%"></div></div>
+                            <span class="skill-percentage">50%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="skill-category">
+                        <div class="skill-category-title">MY KNOWLEDGE LEVEL IN DATA SCIENCE & AI</div>
+                        <div class="skill-item">
+                            <span class="skill-name">MACHINE LEARNING</span>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 50%"></div></div>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">EDA</span>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">DATA VISUALIZATION</span>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">MY KNOWLEDGE LEVEL IN WEB DEVELOPMENT</div>
+                        <div class="skill-item">
+                            <span class="skill-name">HTML & CSS</span>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">JAVASCRIPT</span>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">MY KNOWLEDGE LEVEL IN TOOLS & VERSION CONTROL</div>
+                        <div class="skill-item">
+                            <span class="skill-name">GIT & GITHUB</span>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">NOTION</span>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+     <div class="portfolio-container" id="portfolio">
+        <div class="portfolio-header">
+            <h2 class="portfolio-title">02 PORTFOLIO</h2>
+            <p class="portfolio-subtitle">MY LATEST WORK</p>
+        </div>
+
+        <div class="portfolio-grid">
+            <!-- Python Projects Card -->
+            <div class="portfolio-card">
+                <h3 class="portfolio-card-title">Python Projects</h3>
+                <ul class="portfolio-card-list">
+                    <li class="portfolio-card-item">Intelligent Personal workout planner .</li>
+                </ul>
+            </div>
+
+            <!-- ML Projects Card -->
+            <div class="portfolio-card">
+                <h3 class="portfolio-card-title">ML Projects</h3>
+                <ul class="portfolio-card-list">
+                    <li class="portfolio-card-item">Object detection for football stadiums .</li>
+                    <li class="portfolio-card-item">Palm tree detection .</li>
+                    <li class="portfolio-card-item">Network edge classification .</li>
+                    <li class="portfolio-card-item">Agricultural Greenhouse Object Detection.</li>
+                </ul>
+            </div>
+
+            <!-- Web Projects Card -->
+            <div class="portfolio-card">
+                <h3 class="portfolio-card-title">Web Projects</h3>
+                <ul class="portfolio-card-list">
+                    <li class="portfolio-card-item">Algeria Travel Agency website</li>
+                    <li class="portfolio-card-item">Personal Portfolio website .</li>
+                    <li class="portfolio-card-item">Simple Rest API with express and node.js</li>
+                </ul>
+            </div>
+
+            <!-- EDA Projects Card -->
+            <div class="portfolio-card">
+                <h3 class="portfolio-card-title">EDA Projects</h3>
+                <ul class="portfolio-card-list">
+                    <li class="portfolio-card-item">Titanic Survival Analysis .</li>
+                    <li class="portfolio-card-item">COVID-19 Global Data Analysis .</li>
+                    <li class="portfolio-card-item">Netflix movies and shows dataset.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Experience Section -->
+  <div class="experience-container" id="experience">
+        <div class="experience-header">
+            <h2 class="experience-title">03 EXPERIENCE</h2>
+            <p class="experience-subtitle">MY JOURNEY</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2023-2024</div>
+                    <div class="timeline-company">MobAI</div>
+                    <div class="timeline-description">
+                        MobAI: Participated in the Mobile Applications Development Hackathon 2022 by ENSIA Tech Community, enhancing mobile app development skills and collaborating with peers to create innovative solutions under time constraints.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2024-2025</div>
+                    <div class="timeline-company">HACK&TRAIN</div>
+                    <div class="timeline-description">
+                        Hack Train: Participated in a 3-day hackathon by SecAI Students Club. Our team solved CTF challenges to access Algerian Space Agency datasets, working on AI tasks like object detection. It was a great chance to boost AI and cybersecurity skills.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2024-2025</div>
+                    <div class="timeline-company">ETCVERSERY</div>
+                    <div class="timeline-description">
+                        ETCVersery: Our team, SQRT(9), won 1st place in the Education & Learning Innovation category at ETCVersery 2025. We developed a cost-effective educational hardware prototype to make learning technology more accessible, focusing on interactive and scalable solutions. The experience strengthened our teamwork, creativity, and problem-solving skills.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2024-2025</div>
+                    <div class="timeline-company">DATA-BOUNTY</div>
+                    <div class="timeline-description">
+                        Data Bounty: Participated in the Data Bounty Hackathon by CSCC Club, Blida University, where cybersecurity and AI challenges came together in an intense technical competition.
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">2024-2025</div>
+                    <div class="timeline-company">AGRI-CHALLANGE</div>
+                    <div class="timeline-description">
+                        AgriChallenge 2025: Participated in AgriChallenge, organized by ENSIA and ENSIA. We developed a mobile app to guide visitors and provide information about agricultural innovations and events.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="contact-section" id="contact">
+        <div class="social-icons">
+            <!-- LinkedIn Icon -->
+            <a href="https://www.linkedin.com/in/mezrouh-iname-518335324/" class="social-icon" title="LinkedIn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                    <circle cx="4" cy="4" r="2"/>
+                </svg>
+            </a>
+
+            <!-- GitHub Icon -->
+            <a href="https://github.com/iname-mezrouh" class="social-icon" title="GitHub">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.868-.013-1.703-2.782.603-3.369-1.343-3.369-1.343-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.547 2.914 1.186.092-.923.35-1.547.636-1.903-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+                </svg>
+            </a>
+
+        
+            <!-- Email Icon -->
+            <a href="iname.mezrouh@example.com" class="social-icon" title="Email">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <path d="M2 6l10 7.5L22 6"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+    <footer class="profile-footer">
+    <p>© 2025 Mezrouh Iname  — ENSIA</p>
+  </footer>
+</body>
+</html>
