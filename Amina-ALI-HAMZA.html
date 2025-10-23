@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali Hamza Amina - Space Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+            color: #fff;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #8b5cf6;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            box-shadow: 0 0 20px #8b5cf6;
+        }
+
+        .cursor-trail {
+            width: 5px;
+            height: 5px;
+            background: #8b5cf6;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.6;
+        }
+
+        #stars-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .rocket {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            width: 60px;
+            height: 80px;
+            cursor: pointer;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .rocket:hover {
+            transform: translateY(-10px) scale(1.1);
+        }
+
+        .rocket-body {
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            position: absolute;
+            left: 10px;
+            border-radius: 20px 20px 5px 5px;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .rocket-window {
+            width: 15px;
+            height: 15px;
+            background: #10b981;
+            border-radius: 50%;
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px #10b981;
+        }
+
+        .rocket-fin {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid #581c87;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .rocket-fin.left {
+            left: -10px;
+        }
+
+        .rocket-fin.right {
+            right: -10px;
+        }
+
+        .rocket-flame {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 25px;
+            background: linear-gradient(to bottom, #ff6b00, #ff0000, transparent);
+            border-radius: 0 0 50% 50%;
+            animation: flame 0.2s infinite alternate;
+        }
+
+        @keyframes flame {
+            to {
+                transform: translateX(-50%) scaleY(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        header {
+            text-align: center;
+            padding: 100px 20px 60px;
+            background: linear-gradient(135deg, rgba(88, 28, 135, 0.3), rgba(16, 185, 129, 0.3));
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            animation: orbit 20s linear infinite;
+        }
+
+        .planet1 {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, #ff6b6b, #c92a2a);
+            top: 10%;
+            right: 10%;
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.6);
+        }
+
+        .planet2 {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 30% 30%, #4dabf7, #1864ab);
+            bottom: 15%;
+            left: 8%;
+            animation: orbit 15s linear infinite reverse;
+            box-shadow: 0 0 25px rgba(77, 171, 247, 0.6);
+        }
+
+        @keyframes orbit {
+            0% {
+                transform: rotate(0deg) translateX(20px) rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg) translateX(20px) rotate(-360deg);
+            }
+        }
+
+        h1 {
+            font-size: 3.5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5));
+            }
+            to {
+                filter: drop-shadow(0 0 25px rgba(102, 126, 234, 0.9));
+            }
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            color: #10b981;
+            margin-bottom: 10px;
+        }
+
+        .school {
+            font-size: 1.1em;
+            color: #a78bfa;
+            opacity: 0.9;
+        }
+
+        .bio {
+            max-width: 700px;
+            margin: 30px auto 0;
+            padding: 25px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 15px;
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        .bio p {
+            font-size: 1.05em;
+            line-height: 1.8;
+            color: #cbd5e1;
+            text-align: left;
+        }
+
+        section {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            animation: fadeInUp 1s ease;
+            position: relative;
+        }
+
+        .satellite {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: -15px;
+            right: 20px;
+            animation: satellite-spin 10s linear infinite;
+        }
+
+        @keyframes satellite-spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .satellite-body {
+            width: 15px;
+            height: 15px;
+            background: #8b5cf6;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px #8b5cf6;
+        }
+
+        .satellite-panel {
+            width: 25px;
+            height: 8px;
+            background: linear-gradient(90deg, #1e40af, #3b82f6, #1e40af);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .satellite-panel.left {
+            right: 15px;
+        }
+
+        .satellite-panel.right {
+            left: 15px;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #8b5cf6;
+            text-align: center;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            margin: 15px auto;
+            border-radius: 2px;
+            box-shadow: 0 0 10px #667eea;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .skill-card:hover::before {
+            opacity: 1;
+            animation: pulse-glow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px) scale(1.05) rotateY(10deg);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.6);
+            border-color: #8b5cf6;
+        }
+
+        .skill-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card::after {
+            content: '🛸';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover::after {
+            opacity: 1;
+            transform: translateY(-10px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px) rotateY(5deg);
+            box-shadow: 0 20px 50px rgba(16, 185, 129, 0.6);
+            border-color: #10b981;
+        }
+
+        .project-title {
+            font-size: 1.8em;
+            color: #10b981;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .project-description {
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tech-tag {
+            background: rgba(139, 92, 246, 0.3);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            border: 1px solid rgba(139, 92, 246, 0.5);
+            color: #c4b5fd;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: rgba(139, 92, 246, 0.5);
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
+        }
+
+        .workshop-section {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2));
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .workshop-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .workshop-item {
+            background: rgba(239, 68, 68, 0.2);
+            padding: 20px 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #fca5a5;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .workshop-item::before {
+            content: '⚡';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 1.5em;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .workshop-item:hover::before {
+            opacity: 1;
+            animation: spark 0.5s ease infinite;
+        }
+
+        @keyframes spark {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.2);
+            }
+        }
+
+        .workshop-item:hover {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.6);
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.2));
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .contact-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 50px;
+            background: rgba(59, 130, 246, 0.2);
+            border: 2px solid rgba(59, 130, 246, 0.4);
+            border-radius: 50px;
+            color: #93c5fd;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.4), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .contact-link:hover::before {
+            left: 100%;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.6);
+            border-color: #3b82f6;
+            color: #fff;
+        }
+
+        .github-icon {
+            width: 35px;
+            height: 35px;
+            transition: transform 0.4s ease;
+        }
+
+        .contact-link:hover .github-icon {
+            transform: rotate(360deg) scale(1.2);
+        }
+
+        .link-arrow {
+            font-size: 1.5em;
+            transition: transform 0.4s ease;
+        }
+
+        .contact-link:hover .link-arrow {
+            transform: translateX(10px);
+        }
+
+        .constellation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: rgba(139, 92, 246, 0.3);
+            transform-origin: left center;
+        }
+
+        .meteor-shower {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+            animation: meteor-fall 3s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes meteor-fall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100px) translateX(-100px);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(1000px) translateX(500px);
+            }
+        }
+
+        .astronaut {
+            position: fixed;
+            width: 60px;
+            height: 80px;
+            right: 50%;
+            top: 20%;
+            animation: float-astronaut 6s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        @keyframes float-astronaut {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(-5deg);
+            }
+            25% {
+                transform: translateY(-30px) translateX(20px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(-10px) translateX(40px) rotate(0deg);
+            }
+            75% {
+                transform: translateY(-40px) translateX(20px) rotate(-5deg);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            h2 {
+                font-size: 2em;
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+
+            .rocket {
+                width: 50px;
+                height: 70px;
+                right: 20px;
+                bottom: 20px;
+            }
+
+            .astronaut {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    <canvas id="stars-canvas"></canvas>
+    
+    <div class="astronaut">
+        <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="30" rx="25" ry="30" fill="#e0e0e0" opacity="0.3"/>
+            <circle cx="50" cy="30" r="20" fill="#fff" stroke="#8b5cf6" stroke-width="2"/>
+            <circle cx="45" cy="28" r="3" fill="#000"/>
+            <circle cx="55" cy="28" r="3" fill="#000"/>
+            <path d="M 45 35 Q 50 38 55 35" stroke="#000" stroke-width="2" fill="none"/>
+            <rect x="35" y="50" width="30" height="40" rx="5" fill="#8b5cf6"/>
+            <rect x="30" y="60" width="10" height="25" rx="5" fill="#667eea"/>
+            <rect x="60" y="60" width="10" height="25" rx="5" fill="#667eea"/>
+            <rect x="40" y="90" width="8" height="20" rx="4" fill="#667eea"/>
+            <rect x="52" y="90" width="8" height="20" rx="4" fill="#667eea"/>
+        </svg>
+    </div>
+
+    <div class="rocket" onclick="scrollToTop()">
+        <div class="rocket-body">
+            <div class="rocket-window"></div>
+        </div>
+        <div class="rocket-fin left"></div>
+        <div class="rocket-fin right"></div>
+        <div class="rocket-flame"></div>
+    </div>
+    
+    <div class="container">
+        <header class="floating">
+            <div class="planet planet1"></div>
+            <div class="planet planet2"></div>
+            <h1>Ali Hamza Amina</h1>
+            <p class="subtitle">Third Year Student</p>
+            <p class="school">National Higher School of Artificial Intelligence (ENSIA)</p>
+            <div class="bio">
+                <p>I'm a passionate AI student with a deep fascination for both technology and the cosmos. When I'm not optimizing algorithms or building web platforms, you'll find me stargazing or diving into the latest space discoveries. I believe that just like exploring the universe, exploring code is about pushing boundaries and discovering what's possible beyond the horizon.</p>
+            </div>
+        </header>
+
+        <section>
+            <div class="satellite">
+                <div class="satellite-body"></div>
+                <div class="satellite-panel left"></div>
+                <div class="satellite-panel right"></div>
+            </div>
+            <h2>💻 Programming Languages & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-card"><div class="skill-name">HTML</div></div>
+                <div class="skill-card"><div class="skill-name">CSS</div></div>
+                <div class="skill-card"><div class="skill-name">JavaScript</div></div>
+                <div class="skill-card"><div class="skill-name">PHP</div></div>
+                <div class="skill-card"><div class="skill-name">Bash Script</div></div>
+                <div class="skill-card"><div class="skill-name">C++</div></div>
+                <div class="skill-card"><div class="skill-name">C</div></div>
+                <div class="skill-card"><div class="skill-name">Java</div></div>
+                <div class="skill-card"><div class="skill-name">Python</div></div>
+                <div class="skill-card"><div class="skill-name">Flutter</div></div>
+                <div class="skill-card"><div class="skill-name">Dart</div></div>
+                <div class="skill-card"><div class="skill-name">Arduino</div></div>
+                <div class="skill-card"><div class="skill-name">Raspberry Pi</div></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="satellite">
+                <div class="satellite-body"></div>
+                <div class="satellite-panel left"></div>
+                <div class="satellite-panel right"></div>
+            </div>
+            <h2>🚀 Featured Projects</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <div class="project-title">FRESTO</div>
+                    <div class="project-description">
+                        A web platform that showcases famous restaurants across Algeria, allowing users to explore their menus, view locations, and conveniently place online orders. The website aims to make discovering and ordering from top Algerian restaurants simple, fast, and enjoyable.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Web Development</span>
+                        <span class="tech-tag">Online Ordering</span>
+                        <span class="tech-tag">Restaurant Platform</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-title">Warehouse Optimization</div>
+                    <div class="project-description">
+                        An AI-based system that optimizes the placement of items within a warehouse using search algorithms such as Hill Climbing, Simulated Annealing, and Genetic Algorithms. The system minimizes retrieval time and handling costs by finding efficient item arrangements while respecting weight, volume, and shelf constraints.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">AI</span>
+                        <span class="tech-tag">Hill Climbing</span>
+                        <span class="tech-tag">Simulated Annealing</span>
+                        <span class="tech-tag">Genetic Algorithms</span>
+                        <span class="tech-tag">Optimization</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="workshop-section">
+            <div class="satellite">
+                <div class="satellite-body"></div>
+                <div class="satellite-panel left"></div>
+                <div class="satellite-panel right"></div>
+            </div>
+            <h2>🔧 Hardware & Workshops</h2>
+            <div class="workshop-content">
+                <div class="workshop-item">Arduino Workshops</div>
+                <div class="workshop-item">Raspberry Pi</div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="satellite">
+                <div class="satellite-body"></div>
+                <div class="satellite-panel left"></div>
+                <div class="satellite-panel right"></div>
+            </div>
+            <h2>🌟 Know Me More</h2>
+            <div class="contact-content">
+                <div class="contact-link" onclick="window.open('https://github.com/aminaalihamza', '_blank')">
+                    <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    <span>GitHub Profile</span>
+                    <span class="link-arrow">→</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('stars-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const stars = [];
+        const numStars = 800;
+        const shootingStars = [];
+        const meteors = [];
+        const galaxyParticles = [];
+
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        const trails = [];
+        const maxTrails = 10;
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.left = e.clientX + 'px';
+            trail.style.top = e.clientY + 'px';
+            document.body.appendChild(trail);
+
+            trails.push(trail);
+            if (trails.length > maxTrails) {
+                const oldTrail = trails.shift();
+                oldTrail.remove();
+            }
+
+            setTimeout(() => {
+                trail.style.opacity = '0';
+                setTimeout(() => trail.remove(), 200);
+            }, 100);
+        });
+
+        // Meteor shower
+        for (let i = 0; i < 5; i++) {
+            const meteor = document.createElement('div');
+            meteor.className = 'meteor-shower';
+            meteor.style.left = Math.random() * window.innerWidth + 'px';
+            meteor.style.animationDelay = Math.random() * 3 + 's';
+            document.body.appendChild(meteor);
+        }
+
+        class Star {
+            constructor() {
+                this.reset();
+                this.y = Math.random() * canvas.height;
+                this.opacity = Math.random();
+                this.brightness = Math.random();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.opacity = Math.random() * 0.8 + 0.2;
+                this.twinkleSpeed = Math.random() * 0.015 + 0.005;
+                this.brightness = Math.random();
+                
+                // Star colors based on temperature (like real stars)
+                const temp = Math.random();
+                if (temp < 0.3) {
+                    this.color = { r: 155, g: 176, b: 255 }; // Blue (hot stars)
+                } else if (temp < 0.6) {
+                    this.color = { r: 255, g: 244, b: 234 }; // White-yellow
+                } else if (temp < 0.85) {
+                    this.color = { r: 255, g: 209, b: 178 }; // Orange
+                } else {
+                    this.color = { r: 255, g: 180, b: 150 }; // Red (cool stars)
+                }
+            }
+
+            update() {
+                this.opacity += this.twinkleSpeed;
+                if (this.opacity > 1 || this.opacity < 0.2) {
+                    this.twinkleSpeed *= -1;
+                }
+            }
+
+            draw() {
+                // Main star
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.opacity})`;
+                ctx.fill();
+                
+                // Glow effect for brighter stars
+                if (this.brightness > 0.7) {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.opacity * 0.2})`;
+                    ctx.fill();
+                    
+                    // Cross sparkle for very bright stars
+                    if (this.brightness > 0.9) {
+                        ctx.strokeStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.opacity * 0.4})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(this.x - 4, this.y);
+                        ctx.lineTo(this.x + 4, this.y);
+                        ctx.moveTo(this.x, this.y - 4);
+                        ctx.lineTo(this.x, this.y + 4);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        class ShootingStar {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height / 2;
+                this.length = Math.random() * 100 + 60;
+                this.speed = Math.random() * 15 + 10;
+                this.opacity = 1;
+                this.angle = Math.PI / 4;
+                this.thickness = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += Math.cos(this.angle) * this.speed;
+                this.y += Math.sin(this.angle) * this.speed;
+                this.opacity -= 0.015;
+
+                if (this.opacity <= 0) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.beginPath();
+                const gradient = ctx.createLinearGradient(
+                    this.x, this.y,
+                    this.x - Math.cos(this.angle) * this.length,
+                    this.y - Math.sin(this.angle) * this.length
+                );
+                gradient.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
+                gradient.addColorStop(0.5, `rgba(139, 92, 246, ${this.opacity * 0.6})`);
+                gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = this.thickness;
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(
+                    this.x - Math.cos(this.angle) * this.length,
+                    this.y - Math.sin(this.angle) * this.length
+                );
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+
+        class Nebula {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * 200 + 150;
+                this.hue = Math.random() * 60 + 240; // Purple to blue
+                this.opacity = Math.random() * 0.2 + 0.1;
+                this.pulseSpeed = Math.random() * 0.001 + 0.0005;
+                this.pulsePhase = Math.random() * Math.PI * 2;
+            }
+
+            update() {
+                this.pulsePhase += this.pulseSpeed;
+                this.currentOpacity = this.opacity + Math.sin(this.pulsePhase) * 0.05;
+            }
+
+            draw() {
+                // Multi-layered nebula for realistic look
+                for (let i = 0; i < 3; i++) {
+                    const gradient = ctx.createRadialGradient(
+                        this.x + (i * 20), this.y + (i * 15), 0,
+                        this.x, this.y, this.radius - (i * 30)
+                    );
+                    gradient.addColorStop(0, `hsla(${this.hue + (i * 10)}, 80%, 60%, ${this.currentOpacity * (0.3 - i * 0.08)})`);
+                    gradient.addColorStop(0.3, `hsla(${this.hue + (i * 15)}, 70%, 50%, ${this.currentOpacity * (0.2 - i * 0.06)})`);
+                    gradient.addColorStop(0.6, `hsla(${this.hue + (i * 20)}, 60%, 40%, ${this.currentOpacity * (0.1 - i * 0.03)})`);
+                    gradient.addColorStop(1, 'transparent');
+                    
+                    ctx.fillStyle = gradient;
+                    ctx.fillRect(this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
+                }
+            }
+        }
+
+        class GalaxyParticle {
+            constructor(centerX, centerY) {
+                this.centerX = centerX;
+                this.centerY = centerY;
+                this.angle = Math.random() * Math.PI * 2;
+                this.distance = Math.pow(Math.random(), 1.3) * 250; // More particles near center
+                this.size = Math.random() * 1.2 + 0.3;
+                this.speed = 0.0008 + (Math.random() * 0.0012);
+                this.brightness = Math.random() * 0.9 + 0.1;
+                
+                // Spiral arm calculation
+                this.spiralFactor = this.distance * 0.01;
+                this.wobble = Math.random() * 0.6 + 0.2;
+            }
+
+            update() {
+                // Faster rotation for particles closer to center
+                this.angle += this.speed * (1 + this.distance / 250);
+            }
+
+            draw() {
+                // Calculate spiral position with wobble
+                const spiralAngle = this.angle + this.spiralFactor + Math.sin(this.distance * 0.01) * this.wobble;
+                const x = this.centerX + Math.cos(spiralAngle) * this.distance;
+                const y = this.centerY + Math.sin(spiralAngle) * this.distance * 0.7; // Flatten for galaxy look
+                
+                // Create gradient for particle glow
+                const grad = ctx.createRadialGradient(x, y, 0, x, y, this.size * 6);
+                
+                // Color varies by distance from center (yellow center to blue edges)
+                const distanceRatio = this.distance / 250;
+                const r = Math.floor(255 * (1 - distanceRatio * 0.6));
+                const g = Math.floor(200 * (1 - distanceRatio * 0.4) + 55 * distanceRatio);
+                const b = Math.floor(220 + 35 * distanceRatio);
+                const alpha = this.brightness * (0.9 - distanceRatio * 0.4);
+                
+                grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${alpha})`);
+                grad.addColorStop(0.4, `rgba(${r}, ${g}, ${b}, ${alpha * 0.35})`);
+                grad.addColorStop(1, 'transparent');
+                
+                ctx.save();
+                ctx.globalCompositeOperation = 'lighter'; // Additive blending for glow
+                ctx.fillStyle = grad;
+                ctx.beginPath();
+                ctx.arc(x, y, this.size * 3, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        const nebulas = [];
+        for (let i = 0; i < 4; i++) {
+            nebulas.push(new Nebula());
+        }
+
+        for (let i = 0; i < numStars; i++) {
+            stars.push(new Star());
+        }
+
+        for (let i = 0; i < 5; i++) {
+            shootingStars.push(new ShootingStar());
+        }
+
+        // Create spiral galaxy
+        const galaxyCenter = { x: canvas.width * 0.25, y: canvas.height * 0.4 };
+        for (let i = 0; i < 600; i++) {
+            galaxyParticles.push(new GalaxyParticle(galaxyCenter.x, galaxyCenter.y));
+        }
+
+        // Second galaxy
+        const galaxyCenter2 = { x: canvas.width * 0.72, y: canvas.height * 0.62 };
+        for (let i = 0; i < 500; i++) {
+            galaxyParticles.push(new GalaxyParticle(galaxyCenter2.x, galaxyCenter2.y));
+        }
+
+        function drawGalaxy() {
+            // Deep space background with slight gradient
+            const bgGradient = ctx.createRadialGradient(
+                canvas.width / 2, canvas.height / 2, 0,
+                canvas.width / 2, canvas.height / 2, canvas.width
+            );
+            bgGradient.addColorStop(0, '#000814');
+            bgGradient.addColorStop(1, '#000000');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Distant galaxy glow
+            const distantGalaxy = ctx.createRadialGradient(
+                canvas.width * 0.75, canvas.height * 0.3, 0,
+                canvas.width * 0.75, canvas.height * 0.3, 200
+            );
+            distantGalaxy.addColorStop(0, 'rgba(138, 43, 226, 0.08)');
+            distantGalaxy.addColorStop(0.5, 'rgba(75, 0, 130, 0.04)');
+            distantGalaxy.addColorStop(1, 'transparent');
+            ctx.fillStyle = distantGalaxy;
+            ctx.fillRect(canvas.width * 0.55, canvas.height * 0.1, 400, 400);
+
+            // Milky Way dust effect
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            ctx.rotate(-Math.PI / 6);
+            const milkyWay = ctx.createLinearGradient(-canvas.width, 0, canvas.width, 0);
+            milkyWay.addColorStop(0, 'transparent');
+            milkyWay.addColorStop(0.3, 'rgba(200, 180, 255, 0.03)');
+            milkyWay.addColorStop(0.5, 'rgba(220, 200, 255, 0.06)');
+            milkyWay.addColorStop(0.7, 'rgba(200, 180, 255, 0.03)');
+            milkyWay.addColorStop(1, 'transparent');
+            ctx.fillStyle = milkyWay;
+            ctx.fillRect(-canvas.width, -100, canvas.width * 2, 200);
+            ctx.restore();
+        }
+
+        function animate() {
+            drawGalaxy();
+
+            // Draw nebulas with pulsing
+            nebulas.forEach(nebula => {
+                nebula.update();
+                nebula.draw();
+            });
+
+            // Draw spiral galaxy particles
+            galaxyParticles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            // Draw stars
+            stars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+
+            // Draw shooting stars
+            shootingStars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.querySelectorAll('.skill-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const astronaut = document.querySelector('.astronaut');
+            if (astronaut) {
+                astronaut.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
