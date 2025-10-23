@@ -2,7 +2,7 @@
 This is the team portfolio repository for G5-team4
 
 ### 🌐 Deployed Website  
-[Visit the Live Project]([https://your-deployed-site-link.com](https://mustafaots.github.io/G5-team4-portfolio-project/))
+[https://mustafaots.github.io/G5-team4-portfolio-project/]
 
 ---
 
