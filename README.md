@@ -51,7 +51,7 @@ This approach kept the workflow smooth and transparent.
 ---
 
 ### ⚙️ Challenges and Solutions
-Our biggest challenge was managing **merge conflicts**, especially in shared files like `index.html` and `styles.css`.
+An example of the problems we faced, we had conflicts on merging develop to main and resolved them by revoking certain commits.
 
 **Solutions we implemented:**
 - Gave clear ownership of core files  
