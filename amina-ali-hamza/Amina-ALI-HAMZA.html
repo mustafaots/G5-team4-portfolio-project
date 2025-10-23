@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali Hamza Amina - Space Portfolio</title>
+    <link rel="stylesheet" href="Amina-ALI-HAMZA_styles.css">
+    <script src="Amina-ALI-HAMZA_script.js" defer></script>
+</head>
+<body>
+    <div class="custom-cursor"></div>
+    <canvas id="stars-canvas"></canvas>
+    
+    <div class="astronaut">
+        <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="30" rx="25" ry="30" fill="#e0e0e0" opacity="0.3"/>
+            <circle cx="50" cy="30" r="20" fill="#fff" stroke="#8b5cf6" stroke-width="2"/>
+            <circle cx="45" cy="28" r="3" fill="#000"/>
+            <circle cx="55" cy="28" r="3" fill="#000"/>
+            <path d="M 45 35 Q 50 38 55 35" stroke="#000" stroke-width="2" fill="none"/>
+            <rect x="35" y="50" width="30" height="40" rx="5" fill="#8b5cf6"/>
+            <rect x="30" y="60" width="10" height="25" rx="5" fill="#667eea"/>
+            <rect x="60" y="60" width="10" height="25" rx="5" fill="#667eea"/>
+            <rect x="40" y="90" width="8" height="20" rx="4" fill="#667eea"/>
+            <rect x="52" y="90" width="8" height="20" rx="4" fill="#667eea"/>
+        </svg>
+    </div>
+
+    <div class="rocket" onclick="scrollToTop()">
+        <div class="rocket-body">
+            <div class="rocket-window"></div>
+        </div>
+        <div class="rocket-fin left"></div>
+        <div class="rocket-fin right"></div>
+        <div class="rocket-flame"></div>
+    </div>
+    
+    <div class="container">
+        <header class="floating">
+            <div class="planet planet1"></div>
+            <div class="planet planet2"></div>
+            <h1>Ali Hamza Amina</h1>
+            <p class="subtitle">Third Year Student</p>
+            <p class="school">National Higher School of Artificial Intelligence (ENSIA)</p>
+            <div class="bio">
+                <p>I'm a passionate AI student with a deep fascination for both technology and the cosmos. When I'm not optimizing algorithms or building web platforms, you'll find me stargazing or diving into the latest space discoveries. I believe that just like exploring the universe, exploring code is about pushing boundaries and discovering what's possible beyond the horizon.</p>
+            </div>
+        </header>
+
+        <section>
+            <div class="satellite">
+                <div class="satellite-body"></div>
+                <div class="satellite-panel left"></div>
+                <div class="satellite-panel right"></div>
+            </div>
+            <h2>💻 Programming Languages & Technologies</h2>
+            <div class="skills-grid">
+                <div class="skill-card"><div class="skill-name">HTML</div></div>
+                <div class="skill-card"><div class="skill-name">CSS</div></div>
+                <div class="skill-card"><div class="skill-name">JavaScript</div></div>
+                <div class="skill-card"><div class="skill-name">PHP</div></div>
+                <div class="skill-card"><div class="skill-name">Bash Script</div></div>
+                <div class="skill-card"><div class="skill-name">C++</div></div>
+                <div class="skill-card"><div class="skill-name">C</div></div>
+                <div class="skill-card"><div class="skill-name">Java</div></div>
+                <div class="skill-card"><div class="skill-name">Python</div></div>
+                <div class="skill-card"><div class="skill-name">Flutter</div></div>
+                <div class="skill-card"><div class="skill-name">Dart</div></div>
+                <div class="skill-card"><div class="skill-name">Arduino</div></div>
+                <div class="skill-card"><div class="skill-name">Raspberry Pi</div></div>
+            </div>
+        </section>
+
+        <section>
+            <div class="satellite">
+                <div class="satellite-body"></div>
+                <div class="satellite-panel left"></div>
+                <div class="satellite-panel right"></div>
+            </div>
+            <h2>🚀 Featured Projects</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <div class="project-title">FRESTO</div>
+                    <div class="project-description">
+                        A web platform that showcases famous restaurants across Algeria, allowing users to explore their menus, view locations, and conveniently place online orders. The website aims to make discovering and ordering from top Algerian restaurants simple, fast, and enjoyable.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Web Development</span>
+                        <span class="tech-tag">Online Ordering</span>
+                        <span class="tech-tag">Restaurant Platform</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-title">Warehouse Optimization</div>
+                    <div class="project-description">
+                        An AI-based system that optimizes the placement of items within a warehouse using search algorithms such as Hill Climbing, Simulated Annealing, and Genetic Algorithms. The system minimizes retrieval time and handling costs by finding efficient item arrangements while respecting weight, volume, and shelf constraints.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">AI</span>
+                        <span class="tech-tag">Hill Climbing</span>
+                        <span class="tech-tag">Simulated Annealing</span>
+                        <span class="tech-tag">Genetic Algorithms</span>
+                        <span class="tech-tag">Optimization</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="workshop-section">
+            <div class="satellite">
+                <div class="satellite-body"></div>
+                <div class="satellite-panel left"></div>
+                <div class="satellite-panel right"></div>
+            </div>
+            <h2>🔧 Hardware & Workshops</h2>
+            <div class="workshop-content">
+                <div class="workshop-item">Arduino Workshops</div>
+                <div class="workshop-item">Raspberry Pi</div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="satellite">
+                <div class="satellite-body"></div>
+                <div class="satellite-panel left"></div>
+                <div class="satellite-panel right"></div>
+            </div>
+            <h2>🌟 Know Me More</h2>
+            <div class="contact-content">
+                <div class="contact-link" onclick="window.open('https://github.com/aminaalihamza', '_blank')">
+                    <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    <span>GitHub Profile</span>
+                    <span class="link-arrow">→</span>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
